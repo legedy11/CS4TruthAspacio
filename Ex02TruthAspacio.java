@@ -18,6 +18,7 @@ public class Ex02TruthAspacio {
         int guesses = 3;
         int lowerLimit = 0;
         int upperLimit = 10;
+        int userGuess;
         String startGame = "Start game";
         String changeSettings = "Change settings";
         String endApp = "End application";
@@ -28,14 +29,34 @@ public class Ex02TruthAspacio {
         System.out.printf("%nWelcome to Higher or Lower! What will you do? %n-%s%n-%s%n-%s%n", startGame, changeSettings, endApp);
         String menuSelect = startMenu.nextLine();
         if (startGame.equalsIgnoreCase(menuSelect))  {
-            System.out.printf("started%n%d%n", random);
+            while (guesses > 0) {
+                System.out.printf("You have %d guess(es) left. What is your guess?%n", guesses);
+                userGuess = guess.nextInt();
+                // tester print System.out.printf("started%n%d%n", random);
+                if (userGuess < random) {
+                    System.out.printf("%nGuess higher! ");
+                }
+                if (userGuess > random) {
+                    System.out.printf("%nGuess lower! ");
+                }
+                if (userGuess == random) {
+                    System.out.printf("%nYou got it!%n");
+                    break;
+                }
+                if (guesses == 0) {
+                    System.out.printf("%nYou lost...%n");
+                }
+                guesses--;
+            }
         }
         if (changeSettings.equalsIgnoreCase(menuSelect))  {
             System.out.printf("%nWhat is the lower limit of the random number? ");
             lowerLimit = guess.nextInt();
             System.out.printf("%nWhat is the upper limit of the random number? ");
             upperLimit = guess.nextInt();
-            System.out.printf("%n%d%n%d%n", lowerLimit, upperLimit);
+            System.out.printf("%nHow many guesses are allowed? ");
+            guesses = guess.nextInt();
+            System.out.printf("%nLower limit: %d%nUpper limit: %d%nGuesses: %d%n", lowerLimit, upperLimit, guesses);
         }
         if (endApp.equalsIgnoreCase(menuSelect))  {
             System.out.printf("%nThank you for playing!%n");
